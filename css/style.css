@@ -140,6 +140,7 @@ img { display: block; width: 100%; }
   background-color: var(--ink);
   border-bottom: 1px solid var(--rule-dark);
   transition: box-shadow 0.3s ease;
+  overflow: visible; /* allow logo to spill below the bar */
 }
 .site-header.scrolled {
   box-shadow: 0 2px 24px rgba(0,0,0,0.07);
@@ -153,20 +154,23 @@ img { display: block; width: 100%; }
   max-width: var(--max-w);
   margin: 0 auto;
   padding: 0 var(--gutter);
+  padding-top: 16px; /* pushes logo down so top isn't clipped by viewport */
 }
 
 /* Wordmark / Logo */
 .wordmark {
   display: flex;
-  align-items: center;
+  align-items: flex-end; /* anchor to bottom so logo spills downward */
   line-height: 1;
+  position: relative;
+  z-index: 201;
+  height: 100%; /* stretch to full header height to allow bottom spill */
 }
 
 .site-logo {
-  height: 38px;
+  height: 90px;   /* taller than header — spills below the border */
   width: auto;
   display: block;
-  /* Logo is #CCCCCC — push to full white on dark backgrounds */
   filter: brightness(0) invert(1);
   transition: opacity 0.25s;
 }
@@ -231,7 +235,7 @@ img { display: block; width: 100%; }
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding-top: 64px; /* header offset */
+  padding-top: 90px; /* header offset — accounts for logo spill */
 }
 
 /* Left: text column */
@@ -491,29 +495,41 @@ img { display: block; width: 100%; }
   gap: 1rem;
   margin-bottom: 3rem;
 }
-.cb-badge {
+
+/* ── Badge — generic reusable component ───────────────────────
+   Usage: <span class="badge badge--cobalt">Label</span>
+   Works on both light and dark backgrounds.
+   cb-badge is now an alias for badge (kept for backwards compat)
+   ─────────────────────────────────────────────────────────── */
+.badge {
   display: inline-block;
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  background: var(--green);
-  color: var(--chalk);
   padding: 0.4rem 0.9rem;
-  border-radius: 1px;
+  border-radius: 20px;
+  /* default: cobalt */
+  background: var(--cobalt);
+  color: var(--chalk);
 }
 
-.lb-badge {
-  display: inline-block;
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  background: var(--blue);
-  color: var(--chalk);
-  padding: 0.4rem 0.9rem;
-  border-radius: 1px;
+/* Color variants */
+.badge--pink    { background: var(--red);     color: var(--chalk); }
+.badge--cobalt  { background: var(--cobalt);  color: var(--chalk); }
+.badge--cobalt-dark  { background: var(--cobalt-dark);  color: var(--chalk); }
+.badge--green   { background: var(--green);   color: var(--chalk); }
+.badge--ink     { background: var(--ink);     color: var(--chalk); }
+.badge--chalk   { background: var(--chalk);   color: var(--ink);   }
+.badge--outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--text-primary);
 }
+
+/* cb-badge keeps its original cobalt color */
+.cb-badge { background: var(--cobalt); color: var(--chalk); }
+
 
 .cb-badge-label {
   font-size: 0.65rem;
@@ -827,7 +843,7 @@ img { display: block; width: 100%; }
 
 .about-layout {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns: 1.1fr 1fr;  /* text left, photo right */
   gap: 5rem;
   align-items: start;
 }
@@ -913,7 +929,7 @@ img { display: block; width: 100%; }
   grid-template-columns: repeat(2, 1fr);
   gap: 0;
   border: 1px solid var(--rule);
-  margin-bottom: 2.5rem;
+  margin-top: 1.5rem;  /* space below photo */
 }
 .about-stat {
   padding: 1.25rem 1.5rem;
