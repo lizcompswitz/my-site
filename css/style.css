@@ -155,17 +155,28 @@ img { display: block; width: 100%; }
   padding: 0 var(--gutter);
 }
 
-/* Wordmark */
+/* Wordmark / Logo */
 .wordmark {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--chalk);
+  display: flex;
+  align-items: center;
   line-height: 1;
 }
-.wordmark span {
-  color: var(--red);
+
+.site-logo {
+  height: 38px;
+  width: auto;
+  display: block;
+  /* Logo is #CCCCCC — push to full white on dark backgrounds */
+  filter: brightness(0) invert(1);
+  transition: opacity 0.25s;
+}
+.wordmark:hover .site-logo {
+  opacity: 0.75;
+}
+
+/* On light backgrounds (future pages), flip logo to dark ink */
+.light-ctx .site-logo {
+  filter: brightness(0);  /* renders as pure black */
 }
 
 /* Nav */
@@ -253,13 +264,13 @@ img { display: block; width: 100%; }
   font-size: clamp(3rem, 6vw, 5.5rem);
   line-height: 1;
   letter-spacing: 0.02em;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   color: var(--dark);
   margin-bottom: 1.75rem;
 }
 .hero-headline .italic-line {
   font-family: var(--font-body);
-  font-style: italic;
+  /*font-style: italic;*/
   font-weight: 300;
   font-size: clamp(2rem, 4vw, 3.8rem);
   letter-spacing: 0.01em;
@@ -325,7 +336,7 @@ img { display: block; width: 100%; }
   font-family: var(--font-display);
   font-size: clamp(4rem, 10vw, 9rem);
   line-height: 0.85;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   color: rgba(255,255,255,0.07);
   letter-spacing: 0.05em;
   user-select: none;
@@ -385,7 +396,7 @@ img { display: block; width: 100%; }
 .section-header h2 {
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 4vw, 3rem);
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   letter-spacing: 0.03em;
   line-height: 1;
 }
@@ -532,8 +543,8 @@ img { display: block; width: 100%; }
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  /*text-transform: uppercase; */
+  /*letter-spacing: 0.08em;*/
   color: var(--text-primary);
   margin-bottom: 0.5rem;
   margin-top: 1.5rem;
@@ -757,7 +768,7 @@ img { display: block; width: 100%; }
 .logbook-content h2 {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3.25rem);
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   letter-spacing: 0.03em;
   line-height: 1;
   margin-bottom: 1.25rem;
@@ -862,7 +873,7 @@ img { display: block; width: 100%; }
 .about-content h2 {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3rem);
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   letter-spacing: 0.03em;
   line-height: 1;
   margin-bottom: 0.5rem;
