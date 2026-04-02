@@ -502,6 +502,19 @@ img { display: block; width: 100%; }
   padding: 0.4rem 0.9rem;
   border-radius: 1px;
 }
+
+.lb-badge {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: var(--blue);
+  color: var(--chalk);
+  padding: 0.4rem 0.9rem;
+  border-radius: 1px;
+}
+
 .cb-badge-label {
   font-size: 0.65rem;
   font-weight: 500;
