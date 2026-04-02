@@ -15,37 +15,81 @@
 }
 
 /* ── Tokens ────────────────────────────────────────────────── */
+/*
+   PALETTE — v3, leaning into the moodboard fully:
+
+   Nike heritage patches  →  signal red, cobalt blue, grass green on black
+   Munich '72 mascots     →  pure red + cobalt, flat colour blocks
+   Patent drawings        →  near-black navy bg, chalk-white line work
+
+   System: dark ink base + three bold flat accents (red, cobalt, green).
+   Cream is reserved for text on dark, and light-section backgrounds.
+   No gradients. No warmth. Earned, graphic, precise.
+*/
 :root {
-  --cream:       #F5F0E8;
-  --off-white:   #FAF7F2;
-  --charcoal:    #1A1A1A;
-  --dark:        #111111;
-  --mid:         #5A5A5A;
-  --muted:       #9A9590;
-  --rule:        #D8D2C8;
-  --gold:        #B8892A;
-  --gold-light:  #D4A84B;
-  --red:         #C0392B;
-  --navy:        #1B2A4A;
-  --stamp-bg:    #1B2A4A;
+  --cream:       #F0ECE0;   /* chalk/off-white — text on dark, light bg   */
+  --off-white:   #F5F1E6;   /* alt section background                     */
+  --charcoal:    #1E1E1E;   /* body ink                                   */
+  --dark:        #111114;   /* deepest near-black                         */
+  --mid:         #5A5A60;   /* mid body copy                              */
+  --muted:       #8A8A94;   /* labels, captions                           */
+  --rule:        #D4CFC4;   /* light section rule lines                   */
+  --rule-dark:   rgba(255,255,255,0.1); /* rule lines on dark backgrounds */
+
+  /* ── Three bold flat accents ── */
+  --red:         #E8175D;   /* hot retro pink — primary accent            */
+  --red-dark:    #C4104D;   /* hot pink hover                             */
+  --cobalt:      #2B5FC1;   /* cobalt blue  — Munich '72 / vintage poster */
+  --cobalt-dark: #1E4A9E;   /* cobalt hover                               */
+  --green:       #2E7D45;   /* grass green  — Nike patch tertiary         */
+
+  /* ── Patent drawing dark ── */
+  --ink:         #14161F;   /* patent drawing bg — near-black navy        */
+  --ink-mid:     #1E2130;   /* slightly lighter dark panel bg             */
+  --chalk:       #EDE8DC;   /* chalk line color on dark backgrounds       */
 
   --font-display: 'Fugaz One', Impact, sans-serif;
   --font-body:    'Work Sans', system-ui, sans-serif;
 
   --max-w: 1280px;
   --gutter: clamp(1.5rem, 5vw, 4rem);
+
+  /* ── Semantic text tokens (light context default) ── */
+  --text-primary:   var(--charcoal);   /* headings                  */
+  --text-secondary: var(--mid);        /* body copy                 */
+  --text-muted:     var(--muted);      /* labels, captions, meta    */
+  --text-accent:    var(--red);        /* accent/role labels        */
+  --surface:        var(--cream);      /* section background        */
+  --surface-alt:    var(--off-white);  /* alternate section bg      */
+  --border:         var(--rule);       /* rule lines                */
 }
 
 /* ── Base ──────────────────────────────────────────────────── */
 html { font-size: 16px; scroll-behavior: smooth; }
 
 body {
-  background-color: var(--cream);
-  color: var(--charcoal);
+  background-color: var(--surface);
+  color: var(--text-primary);
   font-family: var(--font-body);
   font-weight: 400;
   line-height: 1.6;
   overflow-x: hidden;
+}
+
+/* ── Global type uses semantic tokens ─────────────────────── */
+h1, h2, h3, h4, h5, h6 { color: var(--text-primary); }
+p { color: var(--text-secondary); }
+
+/* ── Dark context — override semantic tokens at section level  */
+/* Any section with this class automatically flips all          */
+/* descendant h1–h6, p, .label, .section-num to light values.  */
+.dark-ctx {
+  --text-primary:   var(--chalk);
+  --text-secondary: rgba(255,255,255,0.6);
+  --text-muted:     rgba(255,255,255,0.35);
+  --text-accent:    var(--red);
+  --surface:        var(--ink);
+  --border:         var(--rule-dark);
 }
 
 a { color: inherit; text-decoration: none; }
@@ -65,12 +109,12 @@ img { display: block; width: 100%; }
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--text-muted);
 }
 
 .divider {
   border: none;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--border);
   margin: 0;
 }
 
@@ -93,8 +137,8 @@ img { display: block; width: 100%; }
   top: 0; left: 0;
   width: 100%;
   z-index: 200;
-  background-color: var(--cream);
-  border-bottom: 1px solid var(--rule);
+  background-color: var(--ink);
+  border-bottom: 1px solid var(--rule-dark);
   transition: box-shadow 0.3s ease;
 }
 .site-header.scrolled {
@@ -117,11 +161,11 @@ img { display: block; width: 100%; }
   font-size: 1.15rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--dark);
+  color: var(--chalk);
   line-height: 1;
 }
 .wordmark span {
-  color: var(--gold);
+  color: var(--red);
 }
 
 /* Nav */
@@ -136,7 +180,7 @@ img { display: block; width: 100%; }
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--mid);
+  color: rgba(255,255,255,0.5);
   position: relative;
   transition: color 0.25s;
 }
@@ -145,11 +189,11 @@ img { display: block; width: 100%; }
   position: absolute;
   bottom: -3px; left: 0;
   width: 0; height: 1px;
-  background: var(--gold);
+  background: var(--red);
   transition: width 0.3s ease;
 }
 .main-nav a:hover,
-.main-nav a.active { color: var(--charcoal); }
+.main-nav a.active { color: var(--chalk); }
 .main-nav a:hover::after,
 .main-nav a.active::after { width: 100%; }
 
@@ -160,14 +204,14 @@ img { display: block; width: 100%; }
   font-weight: 600 !important;
   letter-spacing: 0.15em !important;
   text-transform: uppercase;
-  background: var(--navy);
+  background: var(--red);
   color: var(--cream) !important;
   padding: 0.5rem 1.1rem;
   border-radius: 2px;
   transition: background 0.25s !important;
 }
 .nav-cta::after { display: none !important; }
-.nav-cta:hover { background: var(--gold) !important; color: var(--dark) !important; }
+.nav-cta:hover { background: var(--red-dark) !important; color: var(--cream) !important; }
 
 /* ============================================================
    HERO
@@ -189,6 +233,7 @@ img { display: block; width: 100%; }
   max-width: 680px;
   margin-left: auto;
   width: 100%;
+  background: var(--cream);
 }
 
 .hero-eyebrow {
@@ -200,7 +245,7 @@ img { display: block; width: 100%; }
 .hero-eyebrow .rule-line {
   width: 32px;
   height: 1px;
-  background: var(--gold);
+  background: var(--red);
 }
 
 .hero-headline {
@@ -219,7 +264,7 @@ img { display: block; width: 100%; }
   font-size: clamp(2rem, 4vw, 3.8rem);
   letter-spacing: 0.01em;
   text-transform: none;
-  color: var(--mid);
+  color: var(--text-secondary);
   display: block;
 }
 
@@ -227,7 +272,7 @@ img { display: block; width: 100%; }
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.8;
-  color: var(--mid);
+  color: var(--text-secondary);
   max-width: 480px;
   margin-bottom: 2.5rem;
 }
@@ -259,7 +304,7 @@ img { display: block; width: 100%; }
 .hero-right {
   position: relative;
   overflow: hidden;
-  background: var(--navy);
+  background: var(--cobalt);
   min-height: 500px;
 }
 .hero-photo {
@@ -303,10 +348,10 @@ img { display: block; width: 100%; }
 .btn:hover { transform: translateY(-1px); }
 
 .btn-primary {
-  background: var(--navy);
+  background: var(--red);
   color: var(--cream);
 }
-.btn-primary:hover { background: var(--gold); color: var(--dark); }
+.btn-primary:hover { background: var(--red-dark); color: var(--cream); }
 
 .btn-outline {
   background: transparent;
@@ -316,10 +361,10 @@ img { display: block; width: 100%; }
 .btn-outline:hover { background: var(--charcoal); color: var(--cream); }
 
 .btn-gold {
-  background: var(--gold);
-  color: var(--dark);
+  background: var(--cobalt);
+  color: var(--chalk);
 }
-.btn-gold:hover { background: var(--charcoal); color: var(--cream); }
+.btn-gold:hover { background: var(--cobalt-dark); color: var(--chalk); }
 
 /* ============================================================
    SECTION: WHAT I DO
@@ -348,7 +393,7 @@ img { display: block; width: 100%; }
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.2em;
-  color: var(--gold);
+  color: var(--red);
 }
 
 .roles-grid {
@@ -371,6 +416,7 @@ img { display: block; width: 100%; }
   font-size: 1.8rem;
   margin-bottom: 1.25rem;
   display: block;
+  color: var(--green);
 }
 .role-card h3 {
   font-family: var(--font-display);
@@ -401,7 +447,7 @@ img { display: block; width: 100%; }
    ============================================================ */
 .coaches-box {
   padding: 7rem 0;
-  background: var(--navy);
+  background: var(--ink);
   position: relative;
   overflow: hidden;
 }
@@ -416,7 +462,7 @@ img { display: block; width: 100%; }
   font-family: var(--font-display);
   font-size: clamp(18rem, 40vw, 36rem);
   letter-spacing: -0.05em;
-  color: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.025);
   line-height: 1;
   pointer-events: none;
   user-select: none;
@@ -440,8 +486,8 @@ img { display: block; width: 100%; }
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  background: var(--gold);
-  color: var(--dark);
+  background: var(--green);
+  color: var(--chalk);
   padding: 0.4rem 0.9rem;
   border-radius: 1px;
 }
@@ -470,15 +516,27 @@ img { display: block; width: 100%; }
   color: #fff;
   margin-bottom: 1.75rem;
 }
-.cb-headline .accent { color: var(--gold); }
+.cb-headline .accent { color: var(--red); }
 
 .cb-desc {
   font-size: 0.95rem;
   font-weight: 300;
   line-height: 1.85;
-  color: rgba(255,255,255,0.6);
+  color: var(--text-secondary);
   margin-bottom: 2.5rem;
   max-width: 460px;
+}
+
+/* h3 subheadings inside dark CB section */
+.cb-subhead {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
 }
 
 .cb-features {
@@ -496,14 +554,14 @@ img { display: block; width: 100%; }
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--red);
   flex-shrink: 0;
   margin-top: 0.5rem;
 }
 .cb-feature p {
   font-size: 0.88rem;
   font-weight: 400;
-  color: rgba(255,255,255,0.7);
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
@@ -542,7 +600,7 @@ img { display: block; width: 100%; }
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: var(--text-muted);
 }
 .cb-card-body {
   padding: 1.75rem 1.5rem;
@@ -567,7 +625,7 @@ img { display: block; width: 100%; }
 .cb-stat .stat-num {
   font-family: var(--font-display);
   font-size: 1.6rem;
-  color: var(--gold);
+  color: var(--red);
   line-height: 1;
   display: block;
   margin-bottom: 0.25rem;
@@ -577,7 +635,7 @@ img { display: block; width: 100%; }
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: var(--text-muted);
 }
 
 /* Training block mockup */
@@ -605,14 +663,14 @@ img { display: block; width: 100%; }
 .cb-block-name {
   font-size: 0.75rem;
   font-weight: 500;
-  color: rgba(255,255,255,0.7);
+  color: var(--text-primary);
   letter-spacing: 0.05em;
 }
 .cb-block-meta {
   font-size: 0.6rem;
   font-weight: 400;
   letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.28);
+  color: var(--text-muted);
   text-transform: uppercase;
 }
 .cb-block-tag {
@@ -650,10 +708,10 @@ img { display: block; width: 100%; }
   position: relative;
 }
 .book-cover {
-  background: var(--navy);
+  background: var(--cobalt);
   border-radius: 3px 8px 8px 3px;
   padding: 2.5rem 2rem;
-  box-shadow: 6px 6px 0 var(--gold), 12px 12px 0 rgba(27,42,74,0.25);
+  box-shadow: 6px 6px 0 var(--red), 12px 12px 0 rgba(20,20,40,0.2);
   text-align: center;
 }
 .book-cover-label {
@@ -661,7 +719,7 @@ img { display: block; width: 100%; }
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--chalk);
   margin-bottom: 1.25rem;
   display: block;
 }
@@ -684,7 +742,8 @@ img { display: block; width: 100%; }
 .book-cover-line {
   width: 40px;
   height: 1px;
-  background: var(--gold);
+  background: var(--chalk);
+  opacity: 0.4;
   margin: 1.25rem auto;
 }
 .book-cover-author {
@@ -707,7 +766,7 @@ img { display: block; width: 100%; }
   font-size: 0.95rem;
   font-weight: 300;
   line-height: 1.85;
-  color: var(--mid);
+  color: var(--text-secondary);
   margin-bottom: 2rem;
 }
 .logbook-specs {
@@ -813,14 +872,14 @@ img { display: block; width: 100%; }
   font-style: italic;
   font-weight: 300;
   font-size: 1.1rem;
-  color: var(--gold);
+  color: var(--text-accent);
   margin-bottom: 2rem;
 }
 .about-content p {
   font-size: 0.92rem;
   font-weight: 300;
   line-height: 1.9;
-  color: var(--mid);
+  color: var(--text-secondary);
   margin-bottom: 1.25rem;
 }
 .about-content p:last-of-type { margin-bottom: 2.5rem; }
@@ -861,11 +920,11 @@ img { display: block; width: 100%; }
    SECTION: MARQUEE TAPE
    ============================================================ */
 .marquee-strip {
-  background: var(--gold);
+  background: var(--red);
   overflow: hidden;
   padding: 0.75rem 0;
-  border-top: 1px solid rgba(0,0,0,0.1);
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-top: none;
+  border-bottom: none;
 }
 .marquee-track {
   display: flex;
@@ -877,13 +936,13 @@ img { display: block; width: 100%; }
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--dark);
+  color: var(--chalk);
   padding: 0 2.5rem;
-  opacity: 0.8;
+  opacity: 1;
 }
 .marquee-sep {
-  color: var(--dark);
-  opacity: 0.4;
+  color: var(--chalk);
+  opacity: 0.45;
   padding: 0 0.5rem;
 }
 
@@ -896,7 +955,7 @@ img { display: block; width: 100%; }
    FOOTER
    ============================================================ */
 .site-footer {
-  background: var(--dark);
+  background: var(--ink);
   color: rgba(255,255,255,0.55);
   padding: 4rem 0 2rem;
 }
@@ -931,7 +990,7 @@ img { display: block; width: 100%; }
   font-style: italic;
   font-weight: 300;
   font-size: 0.9rem;
-  color: rgba(255,255,255,0.35);
+  color: var(--text-secondary);
 }
 
 .footer-nav-group h4 {
@@ -939,7 +998,7 @@ img { display: block; width: 100%; }
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--cobalt);
   margin-bottom: 1rem;
 }
 .footer-nav-group ul {
@@ -949,10 +1008,10 @@ img { display: block; width: 100%; }
 }
 .footer-nav-group a {
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.45);
+  color: var(--text-secondary);
   transition: color 0.25s;
 }
-.footer-nav-group a:hover { color: #fff; }
+.footer-nav-group a:hover { color: var(--text-primary); }
 
 .footer-bottom {
   display: flex;
@@ -973,7 +1032,7 @@ img { display: block; width: 100%; }
 .footer-bottom-links a {
   font-size: 0.7rem;
   letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.3);
+  color: var(--text-muted);
   transition: color 0.25s;
 }
-.footer-bottom-links a:hover { color: var(--gold); }
+.footer-bottom-links a:hover { color: var(--cobalt); }
