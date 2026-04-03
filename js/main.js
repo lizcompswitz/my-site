@@ -10,6 +10,25 @@ if (header) {
   });
 }
 
+// ── Hamburger menu toggle ───────────────────────────────────
+const navToggle = document.querySelector('.nav-toggle');
+const mainNav   = document.querySelector('.main-nav');
+if (navToggle && mainNav) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = mainNav.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+  });
+  // Close menu when a nav link is tapped
+  mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mainNav.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open navigation');
+    });
+  });
+}
+
 // ── Scroll: reveal animation ────────────────────────────────
 const revealEls = document.querySelectorAll('.reveal');
 if (revealEls.length) {

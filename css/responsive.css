@@ -55,23 +55,105 @@
     --gutter: 1.25rem;
   }
 
+  /* Header */
   .header-inner {
     height: 56px;
+    align-items: center;
+    padding-bottom: 0;
   }
-  .wordmark { font-size: 1rem; }
-  .main-nav ul { gap: 1.25rem; }
-  .nav-cta { display: none; }
 
+  /* Smaller logo on mobile */
+  .site-logo {
+    height: 52px;
+  }
+
+  /* Hide desktop nav, show hamburger */
+  .main-nav {
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    background: var(--ink);
+    border-top: 1px solid var(--rule-dark);
+    padding: 1.5rem var(--gutter) 2rem;
+    z-index: 199;
+  }
+  .main-nav.is-open {
+    display: block;
+  }
+  .main-nav ul {
+    flex-direction: column;
+    gap: 0;
+    height: auto;
+    align-items: flex-start;
+  }
+  .main-nav ul li {
+    width: 100%;
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .main-nav ul li:last-child {
+    border-bottom: none;
+    padding-top: 1.25rem;
+  }
+  .main-nav a {
+    display: block;
+    padding: 1rem 0;
+    font-size: 0.8rem;
+  }
+  .nav-cta {
+    display: inline-block !important;
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1rem !important;
+  }
+
+  /* Hamburger button */
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 201;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--chalk);
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    transform-origin: center;
+  }
+  /* Animate to X when open */
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  /* Hero */
+  .hero {
+    padding-top: 56px;
+  }
   .hero-left {
     padding: 4.5rem 1.25rem 3rem;
   }
   .hero-right { min-height: 280px; }
-
   .hero-actions { flex-direction: column; }
   .btn { text-align: center; }
 
   .cb-stat-row { grid-template-columns: repeat(3, 1fr); }
-
   .logbook-specs { flex-wrap: wrap; gap: 1.25rem; }
 
   .about-stats {

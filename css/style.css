@@ -1,11 +1,11 @@
 /* ============================================================
    LIZ COMPOSTO — Personal Site
    Brand: Athletic Heritage × Technical Precision
-   Fonts: Fugaz One (display) · Work Sans (body)
+   Fonts: Fugaz One (display) · Lora (body/editorial) · Work Sans (UI/labels)
    ============================================================ */
 
 /* ── Google Fonts ──────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 /* ── Reset ─────────────────────────────────────────────────── */
 *, *::before, *::after {
@@ -49,7 +49,8 @@
   --chalk:       #EDE8DC;   /* chalk line color on dark backgrounds       */
 
   --font-display: 'Fugaz One', Impact, sans-serif;
-  --font-body:    'Work Sans', system-ui, sans-serif;
+  --font-body:    'Lora', Georgia, serif;          /* paragraphs, editorial */
+  --font-ui:      'Work Sans', system-ui, sans-serif; /* nav, labels, badges, tags */
 
   --max-w: 1280px;
   --gutter: clamp(1.5rem, 5vw, 4rem);
@@ -104,7 +105,7 @@ img { display: block; width: 100%; }
 }
 
 .label {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -148,13 +149,13 @@ img { display: block; width: 100%; }
 
 .header-inner {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
-  height: 64px;
+  height: 72px;
   max-width: var(--max-w);
   margin: 0 auto;
   padding: 0 var(--gutter);
-  padding-top: 16px; /* pushes logo down so top isn't clipped by viewport */
+  padding-bottom: 0;
 }
 
 /* Wordmark / Logo */
@@ -168,12 +169,25 @@ img { display: block; width: 100%; }
 }
 
 .site-logo {
-  height: 90px;   /* taller than header — spills below the border */
+  height: 80px;  /* taller than header — bottom of the z hangs below the border */
   width: auto;
   display: block;
+  z-index: 999;
+  filter: brightness(0) invert(1);
+  transition: opacity 0.25s;
+  position: absolute;
+  top: 10px;
+}
+
+.site-logo-footer {
+  height: 65px;  /* taller than header — bottom of the z hangs below the border */
+  width: auto;
+  display: block;
+  z-index: 999;
   filter: brightness(0) invert(1);
   transition: opacity 0.25s;
 }
+
 .wordmark:hover .site-logo {
   opacity: 0.75;
 }
@@ -188,9 +202,11 @@ img { display: block; width: 100%; }
   display: flex;
   gap: 2.25rem;
   align-items: center;
+  height: 72px; /* pin nav links to the center of the header bar */
 }
 
 .main-nav a {
+  font-family: var(--font-ui);
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.18em;
@@ -215,6 +231,7 @@ img { display: block; width: 100%; }
 /* CTA pill in nav */
 .nav-cta {
   display: inline-block;
+  font-family: var(--font-ui) !important;
   font-size: 0.68rem !important;
   font-weight: 600 !important;
   letter-spacing: 0.15em !important;
@@ -228,6 +245,9 @@ img { display: block; width: 100%; }
 .nav-cta::after { display: none !important; }
 .nav-cta:hover { background: var(--red-dark) !important; color: var(--cream) !important; }
 
+/* Hamburger — hidden on desktop */
+.nav-toggle { display: none; }
+
 /* ============================================================
    HERO
    ============================================================ */
@@ -235,7 +255,7 @@ img { display: block; width: 100%; }
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding-top: 90px; /* header offset — accounts for logo spill */
+  padding-top: 72px; /* exactly the header height */
 }
 
 /* Left: text column */
@@ -274,7 +294,7 @@ img { display: block; width: 100%; }
 }
 .hero-headline .italic-line {
   font-family: var(--font-body);
-  /*font-style: italic;*/
+  font-style: italic;
   font-weight: 300;
   font-size: clamp(2rem, 4vw, 3.8rem);
   letter-spacing: 0.01em;
@@ -299,6 +319,7 @@ img { display: block; width: 100%; }
   margin-bottom: 2.5rem;
 }
 .hero-tags .tag {
+  font-family: var(--font-ui);
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -349,7 +370,7 @@ img { display: block; width: 100%; }
 /* ── Buttons ───────────────────────────────────────────────── */
 .btn {
   display: inline-block;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -503,6 +524,7 @@ img { display: block; width: 100%; }
    ─────────────────────────────────────────────────────────── */
 .badge {
   display: inline-block;
+  font-family: var(--font-ui);
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.22em;
@@ -535,8 +557,9 @@ img { display: block; width: 100%; }
   font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.15em;
+  font-family: var(--font-ui);
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
+  color: var(--text-secondary);
 }
 
 /* Layout */
@@ -556,7 +579,11 @@ img { display: block; width: 100%; }
   color: #fff;
   margin-bottom: 1.75rem;
 }
-.cb-headline .accent { color: var(--red); }
+.accent-red { color: var(--red); }
+
+.accent-green { color: var(--green); }
+
+.accent-blue { color: var(--cobalt); }
 
 .cb-desc {
   font-size: 0.95rem;
@@ -636,6 +663,7 @@ img { display: block; width: 100%; }
   background: rgba(255,255,255,0.15);
 }
 .cb-card-title {
+  font-family: var(--font-ui);
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -671,6 +699,7 @@ img { display: block; width: 100%; }
   margin-bottom: 0.25rem;
 }
 .cb-stat .stat-label {
+  font-family: var(--font-ui);
   font-size: 0.6rem;
   font-weight: 500;
   letter-spacing: 0.15em;
@@ -707,6 +736,7 @@ img { display: block; width: 100%; }
   letter-spacing: 0.05em;
 }
 .cb-block-meta {
+  font-family: var(--font-ui);
   font-size: 0.6rem;
   font-weight: 400;
   letter-spacing: 0.1em;
@@ -1037,6 +1067,7 @@ img { display: block; width: 100%; }
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.22em;
+  font-family: var(--font-ui);
   text-transform: uppercase;
   color: var(--cobalt);
   margin-bottom: 1rem;
