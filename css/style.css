@@ -1107,3 +1107,103 @@ img { display: block; width: 100%; }
   transition: color 0.25s;
 }
 .footer-bottom-links a:hover { color: var(--cobalt); }
+
+/* ============================================================
+   WEATHER WIDGET
+   ============================================================ */
+.weather-widget {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(232, 23, 93, 0.08);
+  border: 1px solid rgba(232, 23, 93, 0.15);
+  border-radius: 8px;
+  font-family: var(--font-ui);
+}
+
+.weather-loading {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.weather-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.weather-emoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.weather-info {
+  flex: 1;
+}
+
+.weather-temp {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.weather-desc {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.weather-error {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   ACCENT COLOR UTILITIES
+   ============================================================ */
+.accent-red { color: var(--red); }
+.accent-green { color: var(--green); }
+.accent-cobalt { color: var(--cobalt); }
+
+/* ── Transition delays for staggered reveals ──────────────── */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-15 { transition-delay: 0.15s; }
+
+/* ── Button variants ──────────────────────────────────────── */
+.btn-outline-light {
+  color: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.btn-outline-light:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--chalk);
+}
+
+/* ── CB Block colors (mockup) ─────────────────────────────── */
+.cb-block-color-gold { background: #B8892A; }
+.cb-block-color-green { background: #5A8A6A; }
+.cb-block-color-blue { background: #4A6B9A; }
+.cb-block-color-purple { background: #8A5A8A; }
+
+.cb-block-tag-gold {
+  background: rgba(184,137,42,0.15);
+  color: #B8892A;
+}
+.cb-block-tag-green {
+  background: rgba(90,138,106,0.15);
+  color: #5A8A6A;
+}
+.cb-block-tag-blue {
+  background: rgba(74,107,154,0.15);
+  color: #8AABD4;
+}
+.cb-block-tag-purple {
+  background: rgba(138,90,138,0.15);
+  color: #C49AC4;
+}

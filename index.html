@@ -135,7 +135,7 @@
             </p>
           </div>
 
-          <div class="role-card reveal" style="transition-delay: 0.1s;">
+          <div class="role-card reveal reveal-delay-1">
             <span class="role-num label">02</span>
             <span class="role-icon">⊕</span>
             <h3>Pole Vault Coach</h3>
@@ -146,7 +146,7 @@
             </p>
           </div>
 
-          <div class="role-card reveal" style="transition-delay: 0.2s;">
+          <div class="role-card reveal reveal-delay-2">
             <span class="role-num label">03</span>
             <span class="role-icon">⊞</span>
             <h3>Builder &amp; Creator</h3>
@@ -217,12 +217,12 @@
 
             <div class="cb-actions">
               <a href="mailto:elizcomposto@gmail.com?subject=Coaches Box Interest" class="btn btn-gold">Stay in the Loop</a>
-              <a href="#about" class="btn" style="color:rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.2);">Learn More About Liz</a>
+              <a href="#about" class="btn btn-outline-light">Learn More About Liz</a>
             </div>
           </div>
 
           <!-- Right: UI mockup card -->
-          <div class="cb-card reveal" style="transition-delay: 0.15s;" aria-hidden="true">
+          <div class="cb-card reveal reveal-delay-15" aria-hidden="true">
             <div class="cb-card-header">
               <div class="cb-card-dots">
                 <span></span><span></span><span></span>
@@ -250,36 +250,36 @@
               <!-- Training block list -->
               <div class="cb-block-list">
                 <div class="cb-block-item">
-                  <div class="cb-block-color" style="background: #B8892A;"></div>
+                  <div class="cb-block-color cb-block-color-gold"></div>
                   <div class="cb-block-info">
                     <div class="cb-block-name">Approach Run — 6 Step</div>
                     <div class="cb-block-meta">Technical · 35 min</div>
                   </div>
-                  <span class="cb-block-tag" style="background:rgba(184,137,42,0.15); color:#B8892A;">Speed</span>
+                  <span class="cb-block-tag cb-block-tag-gold">Speed</span>
                 </div>
                 <div class="cb-block-item">
-                  <div class="cb-block-color" style="background: #5A8A6A;"></div>
+                  <div class="cb-block-color cb-block-color-green"></div>
                   <div class="cb-block-info">
                     <div class="cb-block-name">Plant &amp; Takeoff Drills</div>
                     <div class="cb-block-meta">Skill · 45 min</div>
                   </div>
-                  <span class="cb-block-tag" style="background:rgba(90,138,106,0.15); color:#5A8A6A;">Technique</span>
+                  <span class="cb-block-tag cb-block-tag-green">Technique</span>
                 </div>
                 <div class="cb-block-item">
-                  <div class="cb-block-color" style="background: #4A6B9A;"></div>
+                  <div class="cb-block-color cb-block-color-blue"></div>
                   <div class="cb-block-info">
                     <div class="cb-block-name">Box &amp; Inversion Work</div>
                     <div class="cb-block-meta">Strength · 30 min</div>
                   </div>
-                  <span class="cb-block-tag" style="background:rgba(74,107,154,0.15); color:#8AABD4;">Power</span>
+                  <span class="cb-block-tag cb-block-tag-blue">Power</span>
                 </div>
                 <div class="cb-block-item">
-                  <div class="cb-block-color" style="background: #8A5A8A;"></div>
+                  <div class="cb-block-color cb-block-color-purple"></div>
                   <div class="cb-block-info">
                     <div class="cb-block-name">Competition Simulation</div>
                     <div class="cb-block-meta">Full Vault · 60 min</div>
                   </div>
-                  <span class="cb-block-tag" style="background:rgba(138,90,138,0.15); color:#C49AC4;">Compete</span>
+                  <span class="cb-block-tag cb-block-tag-purple">Compete</span>
                 </div>
               </div>
 
@@ -312,7 +312,7 @@
           </div>
 
           <!-- Content -->
-          <div class="logbook-content reveal" style="transition-delay: 0.15s;">
+          <div class="logbook-content reveal reveal-delay-15">
             <div class="cb-badge-row reveal">
               <span class="badge badge--cobalt-dark">Published</span>
               <span class="cb-badge-label">Dec. 2020</span>
@@ -389,7 +389,7 @@
           </div>
 
           <!-- Right: Photo + stats -->
-          <div class="about-photo-wrap reveal" style="transition-delay: 0.15s;">
+          <div class="about-photo-wrap reveal reveal-delay-15">
             <div class="about-photo-frame">
               <img
                 src="docs/liz-assets/liz-photo.jpeg"
@@ -397,6 +397,11 @@
               />
             </div>
             <p class="about-photo-caption">Liz Schweitzer · DFW, Texas</p>
+
+            <!-- Weather Widget -->
+            <div class="weather-widget" id="weather-widget">
+              <div class="weather-loading">Loading weather...</div>
+            </div>
 
             <div class="about-stats">
               <div class="about-stat">
