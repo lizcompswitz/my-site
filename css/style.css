@@ -585,6 +585,8 @@ img { display: block; width: 100%; }
 
 .accent-blue { color: var(--cobalt); }
 
+.accent-charcoal { color: var(--charcoal); }
+
 .cb-desc {
   font-size: 0.95rem;
   font-weight: 300;
