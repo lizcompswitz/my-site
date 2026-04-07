@@ -309,6 +309,16 @@ img { display: block; width: 100%; }
   background: var(--cream);
 }
 
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 8vw, 6rem) var(--gutter);
+  max-width: 560px;
+  width: 100%;
+  background: var(--cream);
+}
+
 .hero-eyebrow {
   display: flex;
   align-items: center;
@@ -369,13 +379,7 @@ img { display: block; width: 100%; }
 }
 
 /* hero-actions is now part of .actions-row utility */
-/* Right: photo column */
-.hero-right {
-  position: relative;
-  overflow: hidden;
-  background: var(--cobalt);
-  min-height: 500px;
-}
+
 .hero-photo {
   width: 100%;
   height: 100%;
