@@ -104,13 +104,44 @@ img { display: block; width: 100%; }
   padding: 0 var(--gutter);
 }
 
+/* Reusable small-caps label — used by nav group headers,
+   badge labels, stat keys, spec keys, photo captions,
+   book cover annotations, block meta, card titles.         */
+.meta-label,
 .label {
   font-family: var(--font-ui);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-muted);
+}
+.label { font-size: 0.65rem; letter-spacing: 0.2em; }
+
+/* Reusable section heading — display font, responsive size  */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+/* Reusable body description text */
+.desc-text {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  max-width: 460px;
+}
+
+/* Reusable actions row (button groups) */
+.actions-row,
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .divider {
@@ -118,6 +149,13 @@ img { display: block; width: 100%; }
   border-top: 1px solid var(--border);
   margin: 0;
 }
+
+/* ── Accent color utilities ────────────────────────────────── */
+.accent-red      { color: var(--red); }
+.accent-green    { color: var(--green); }
+.accent-blue     { color: var(--cobalt); }
+.accent-charcoal { color: var(--charcoal); }
+.accent-cobalt   { color: var(--cobalt); }
 
 /* ── Scroll Animations ─────────────────────────────────────── */
 .reveal {
@@ -330,12 +368,7 @@ img { display: block; width: 100%; }
   border-radius: 1px;
 }
 
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
+/* hero-actions is now part of .actions-row utility */
 /* Right: photo column */
 .hero-right {
   position: relative;
@@ -401,82 +434,6 @@ img { display: block; width: 100%; }
   color: var(--chalk);
 }
 .btn-gold:hover { background: var(--cobalt-dark); color: var(--chalk); }
-
-/* ============================================================
-   SECTION: WHAT I DO
-   ============================================================ */
-.what-i-do {
-  padding: 6rem 0;
-  background: var(--off-white);
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-}
-
-.section-header {
-  display: flex;
-  align-items: baseline;
-  gap: 1.25rem;
-  margin-bottom: 3.5rem;
-}
-.section-header h2 {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  /*text-transform: uppercase;*/
-  letter-spacing: 0.03em;
-  line-height: 1;
-}
-.section-header .section-num {
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  color: var(--red);
-}
-
-.roles-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  border: 1px solid var(--rule);
-}
-
-.role-card {
-  padding: 2.5rem 2rem;
-  border-right: 1px solid var(--rule);
-  position: relative;
-  transition: background 0.3s;
-}
-.role-card:last-child { border-right: none; }
-.role-card:hover { background: var(--cream); }
-
-.role-icon {
-  font-size: 1.8rem;
-  margin-bottom: 1.25rem;
-  display: block;
-  color: var(--green);
-}
-.role-card h3 {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.75rem;
-  color: var(--dark);
-}
-.role-card p {
-  font-size: 0.88rem;
-  font-weight: 300;
-  line-height: 1.75;
-  color: var(--mid);
-}
-.role-card .role-num {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.5rem;
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  color: var(--rule);
-}
 
 /* ============================================================
    SECTION: COACHES BOX PROMO
@@ -549,7 +506,7 @@ img { display: block; width: 100%; }
   border: 1px solid var(--text-primary);
 }
 
-/* cb-badge keeps its original cobalt color */
+/* cb-badge keeps its original cobalt color (backwards compat alias) */
 .cb-badge { background: var(--cobalt); color: var(--chalk); }
 
 
@@ -579,13 +536,7 @@ img { display: block; width: 100%; }
   color: #fff;
   margin-bottom: 1.75rem;
 }
-.accent-red { color: var(--red); }
-
-.accent-green { color: var(--green); }
-
-.accent-blue { color: var(--cobalt); }
-
-.accent-charcoal { color: var(--charcoal); }
+.cb-headline .accent { color: var(--red); }
 
 .cb-desc {
   font-size: 0.95rem;
@@ -632,12 +583,6 @@ img { display: block; width: 100%; }
   font-weight: 400;
   color: var(--text-secondary);
   line-height: 1.6;
-}
-
-.cb-actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
 }
 
 /* Right panel: mockup card */
@@ -701,6 +646,7 @@ img { display: block; width: 100%; }
   margin-bottom: 0.25rem;
 }
 .cb-stat .stat-label {
+  /* extends .meta-label via shared pattern */
   font-family: var(--font-ui);
   font-size: 0.6rem;
   font-weight: 500;
@@ -826,10 +772,10 @@ img { display: block; width: 100%; }
   text-transform: uppercase;
 }
 
+/* Section headings reuse .section-heading utility */
 .logbook-content h2 {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3.25rem);
-  /*text-transform: uppercase;*/
   letter-spacing: 0.03em;
   line-height: 1;
   margin-bottom: 1.25rem;
@@ -910,31 +856,9 @@ img { display: block; width: 100%; }
   text-align: center;
 }
 
-/* Liz name graphic */
-.name-graphic-wrap {
-  margin-top: 2rem;
-  border: 1px solid var(--rule);
-  background: var(--cream);
-  padding: 1.5rem;
-}
-.name-graphic-wrap img {
-  width: 100%;
-  height: auto;
-}
-.name-graphic-label {
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 0.75rem;
-  display: block;
-}
-
 .about-content h2 {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3rem);
-  /*text-transform: uppercase;*/
   letter-spacing: 0.03em;
   line-height: 1;
   margin-bottom: 0.5rem;
@@ -955,73 +879,6 @@ img { display: block; width: 100%; }
   margin-bottom: 1.25rem;
 }
 .about-content p:last-of-type { margin-bottom: 2.5rem; }
-
-.about-stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0;
-  border: 1px solid var(--rule);
-  margin-top: 1.5rem;  /* space below photo */
-}
-.about-stat {
-  padding: 1.25rem 1.5rem;
-  border-right: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-}
-.about-stat:nth-child(2n) { border-right: none; }
-.about-stat:nth-child(3),
-.about-stat:nth-child(4) { border-bottom: none; }
-
-.about-stat .stat-val {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  color: var(--dark);
-  line-height: 1;
-  display: block;
-  margin-bottom: 0.25rem;
-}
-.about-stat .stat-key {
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-/* ============================================================
-   SECTION: MARQUEE TAPE
-   ============================================================ */
-.marquee-strip {
-  background: var(--red);
-  overflow: hidden;
-  padding: 0.75rem 0;
-  border-top: none;
-  border-bottom: none;
-}
-.marquee-track {
-  display: flex;
-  white-space: nowrap;
-  animation: marquee 24s linear infinite;
-}
-.marquee-item {
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--chalk);
-  padding: 0 2.5rem;
-  opacity: 1;
-}
-.marquee-sep {
-  color: var(--chalk);
-  opacity: 0.45;
-  padding: 0 0.5rem;
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
 
 /* ============================================================
    FOOTER
@@ -1164,13 +1021,6 @@ img { display: block; width: 100%; }
   font-size: 0.75rem;
   color: var(--text-muted);
 }
-
-/* ============================================================
-   ACCENT COLOR UTILITIES
-   ============================================================ */
-.accent-red { color: var(--red); }
-.accent-green { color: var(--green); }
-.accent-cobalt { color: var(--cobalt); }
 
 /* ── Transition delays for staggered reveals ──────────────── */
 .reveal-delay-1 { transition-delay: 0.1s; }

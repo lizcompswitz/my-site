@@ -34,15 +34,6 @@
     gap: 3.5rem;
   }
 
-  .roles-grid {
-    grid-template-columns: 1fr;
-  }
-  .role-card {
-    border-right: none;
-    border-bottom: 1px solid var(--rule);
-  }
-  .role-card:last-child { border-bottom: none; }
-
   .footer-top {
     flex-direction: column;
     gap: 2.5rem;
@@ -156,10 +147,6 @@
   .cb-stat-row { grid-template-columns: repeat(3, 1fr); }
   .logbook-specs { flex-wrap: wrap; gap: 1.25rem; }
 
-  .about-stats {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .footer-bottom {
     flex-direction: column;
     text-align: center;
@@ -167,6 +154,4 @@
   .footer-bottom-links {
     justify-content: center;
   }
-
-  .section-header { flex-direction: column; gap: 0.25rem; }
 }
