@@ -1,0 +1,1088 @@
+/* ============================================================
+   one twelve | 112.
+   Brand: Athletic Heritage × Technical Precision
+   Fonts: Fugaz One (display) · Lora (body/editorial) · Work Sans (UI/labels)
+   Fonts are loaded via next/font/google in layout.tsx
+   ============================================================ */
+
+/* ── Tailwind v4 ───────────────────────────────────────────── */
+@import "tailwindcss";
+
+@theme {
+  --font-family-display: 'Fugaz One', Impact, sans-serif;
+  --font-family-body:    'Lora', Georgia, serif;
+  --font-family-ui:      'Work Sans', system-ui, sans-serif;
+  --font-family-brush:   'Nanum Brush Script', cursive;
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Tokens ────────────────────────────────────────────────── */
+/*
+   PALETTE — v3, leaning into the moodboard fully:
+
+   Nike heritage patches  →  signal red, cobalt blue, grass green on black
+   Munich '72 mascots     →  pure red + cobalt, flat colour blocks
+   Patent drawings        →  near-black navy bg, chalk-white line work
+
+   System: dark ink base + three bold flat accents (red, cobalt, green).
+   Cream is reserved for text on dark, and light-section backgrounds.
+   No gradients. No warmth. Earned, graphic, precise.
+*/
+:root {
+  --cream:       #F0ECE0;   /* chalk/off-white — text on dark, light bg   */
+  --off-white:   #F5F1E6;   /* alt section background                     */
+  --charcoal:    #1E1E1E;   /* body ink                                   */
+  --dark:        #111114;   /* deepest near-black                         */
+  --mid:         #5A5A60;   /* mid body copy                              */
+  --muted:       #8A8A94;   /* labels, captions                           */
+  --rule:        #D4CFC4;   /* light section rule lines                   */
+  --rule-dark:   rgba(255,255,255,0.1); /* rule lines on dark backgrounds */
+
+  /* ── Three bold flat accents ── */
+  --red:         #E8175D;   /* hot retro pink — primary accent            */
+  --red-dark:    #C4104D;   /* hot pink hover                             */
+  --cobalt:      #2B5FC1;   /* cobalt blue  — Munich '72 / vintage poster */
+  --cobalt-dark: #1E4A9E;   /* cobalt hover                               */
+  --green:       #2E7D45;   /* grass green  — Nike patch tertiary         */
+
+  /* ── Patent drawing dark ── */
+  --ink:         #14161F;   /* patent drawing bg — near-black navy        */
+  --ink-mid:     #1E2130;   /* slightly lighter dark panel bg             */
+  --chalk:       #EDE8DC;   /* chalk line color on dark backgrounds       */
+
+  --font-display: 'Fugaz One', Impact, sans-serif;
+  --font-brush:   'Nanum Brush Script', cursive;   /* logo / wordmark      */
+  --font-body:    'Lora', Georgia, serif;          /* paragraphs, editorial */
+  --font-ui:      'Work Sans', system-ui, sans-serif; /* nav, labels, badges, tags */
+
+  --max-w: 1280px;
+  --gutter: clamp(1.5rem, 5vw, 4rem);
+
+  /* ── Semantic text tokens (light context default) ── */
+  --text-primary:   var(--charcoal);   /* headings                  */
+  --text-secondary: var(--mid);        /* body copy                 */
+  --text-muted:     var(--muted);      /* labels, captions, meta    */
+  --text-accent:    var(--red);        /* accent/role labels        */
+  --surface:        var(--cream);      /* section background        */
+  --surface-alt:    var(--off-white);  /* alternate section bg      */
+  --border:         var(--rule);       /* rule lines                */
+}
+
+/* ── Base ──────────────────────────────────────────────────── */
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background-color: var(--surface);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Global type uses semantic tokens ─────────────────────── */
+h1, h2, h3, h4, h5, h6 { color: var(--text-primary); }
+p { color: var(--text-secondary); }
+
+/* ── Dark context — override semantic tokens at section level  */
+/* Any section with this class automatically flips all          */
+/* descendant h1–h6, p, .label, .section-num to light values.  */
+.dark-ctx {
+  --text-primary:   var(--chalk);
+  --text-secondary: rgba(255,255,255,0.6);
+  --text-muted:     rgba(255,255,255,0.35);
+  --text-accent:    var(--red);
+  --surface:        var(--ink);
+  --border:         var(--rule-dark);
+}
+
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+img { display: block; width: 100%; }
+
+/* ── 112. Wordmark ─────────────────────────────────────────── */
+.logo-text {
+  font-family: var(--font-brush);
+  font-size: 2.25rem;
+  color: var(--chalk);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.nav-active {
+  color: var(--red) !important;
+}
+
+/* ── Utility ───────────────────────────────────────────────── */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Reusable small-caps label — used by nav group headers,
+   badge labels, stat keys, spec keys, photo captions,
+   book cover annotations, block meta, card titles.         */
+.meta-label,
+.label {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.label { font-size: 0.65rem; letter-spacing: 0.2em; }
+
+/* Reusable section heading — display font, responsive size  */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+/* Reusable body description text */
+.desc-text {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  max-width: 460px;
+}
+
+/* Reusable actions row (button groups) */
+.actions-row,
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* ── Accent color utilities ────────────────────────────────── */
+.accent-red      { color: var(--red); }
+.accent-pink     { color: var(--red); }
+.accent-green    { color: var(--green); }
+.accent-blue     { color: var(--cobalt); }
+.accent-charcoal { color: var(--charcoal); font-family: var(--font-body); font-style: italic; }
+.accent-cobalt   { color: var(--cobalt); }
+
+/* ── Scroll Animations ─────────────────────────────────────── */
+/* Reveal is visible by default — no JS scroll observer in Next.js yet */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   HEADER / NAV
+   ============================================================ */
+.site-header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 200;
+  background-color: var(--ink);
+  border-bottom: 1px solid var(--rule-dark);
+  transition: box-shadow 0.3s ease;
+  overflow: visible; /* allow logo to spill below the bar */
+}
+.site-header.scrolled {
+  box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+}
+
+.header-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 72px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  padding-bottom: 0;
+}
+
+/* Wordmark / Logo */
+.wordmark {
+  display: flex;
+  align-items: flex-end; /* anchor to bottom so logo spills downward */
+  line-height: 1;
+  position: relative;
+  z-index: 201;
+  height: 100%; /* stretch to full header height to allow bottom spill */
+}
+
+.site-logo {
+  height: 80px;  /* taller than header — bottom of the z hangs below the border */
+  width: auto;
+  display: block;
+  z-index: 999;
+  filter: brightness(0) invert(1);
+  transition: opacity 0.25s;
+  position: absolute;
+  top: 10px;
+}
+
+.site-logo-footer {
+  height: 65px;  /* taller than header — bottom of the z hangs below the border */
+  width: auto;
+  display: block;
+  z-index: 999;
+  filter: brightness(0) invert(1);
+  transition: opacity 0.25s;
+}
+
+.wordmark:hover .site-logo {
+  opacity: 0.75;
+}
+
+/* On light backgrounds (future pages), flip logo to dark ink */
+.light-ctx .site-logo {
+  filter: brightness(0);  /* renders as pure black */
+}
+
+/* Nav */
+.main-nav ul {
+  display: flex;
+  gap: 2.25rem;
+  align-items: center;
+  height: 72px; /* pin nav links to the center of the header bar */
+}
+
+.main-nav a {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  position: relative;
+  transition: color 0.25s;
+}
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--red);
+  transition: width 0.3s ease;
+}
+.main-nav a:hover,
+.main-nav a.active { color: var(--chalk); }
+.main-nav a:hover::after,
+.main-nav a.active::after { width: 100%; }
+
+/* CTA pill in nav */
+.nav-cta {
+  display: inline-block;
+  font-family: var(--font-ui) !important;
+  font-size: 0.68rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase;
+  background: var(--red);
+  color: var(--cream) !important;
+  padding: 0.5rem 1.1rem;
+  border-radius: 2px;
+  transition: background 0.25s !important;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover { background: var(--red-dark) !important; color: var(--cream) !important; }
+
+/* Hamburger — hidden on desktop */
+.nav-toggle { display: none; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 72px; /* exactly the header height */
+}
+
+/* Left: text column */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 8vw, 6rem) var(--gutter) clamp(3rem, 8vw, 6rem) var(--gutter);
+  border-right: 1px solid var(--rule);
+  max-width: 680px;
+  margin-left: auto;
+  width: 100%;
+  background: var(--cream);
+}
+
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 8vw, 6rem) var(--gutter);
+  max-width: 560px;
+  width: 100%;
+  background: var(--cream);
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+.hero-eyebrow .rule-line {
+  width: 32px;
+  height: 1px;
+  background: var(--red);
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  /*text-transform: uppercase;*/
+  color: var(--dark);
+  margin-bottom: 1.75rem;
+}
+.hero-headline .italic-line {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.hero-bio {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+.hero-tags .tag {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid var(--rule);
+  padding: 0.35rem 0.8rem;
+  color: var(--mid);
+  border-radius: 1px;
+}
+
+/* hero-actions is now part of .actions-row utility */
+
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0.88;
+  filter: sepia(15%) contrast(1.05);
+}
+.hero-overlay-text {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 2rem;
+  text-align: right;
+}
+.hero-overlay-text .big-label {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10vw, 9rem);
+  line-height: 0.85;
+  /*text-transform: uppercase;*/
+  color: rgba(255,255,255,0.07);
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.75rem;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s, transform 0.2s;
+}
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary {
+  background: var(--red);
+  color: var(--cream);
+}
+.btn-primary:hover { background: var(--red-dark); color: var(--cream); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--charcoal);
+  border: 1px solid var(--charcoal);
+}
+.btn-outline:hover { background: var(--charcoal); color: var(--cream); }
+
+.btn-gold {
+  background: var(--cobalt);
+  color: var(--chalk);
+}
+.btn-gold:hover { background: var(--cobalt-dark); color: var(--chalk); }
+
+/* ============================================================
+   SECTION: COACHES BOX PROMO
+   ============================================================ */
+.coaches-box {
+  padding: 7rem 0;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background text */
+.coaches-box::before {
+  content: 'CB';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: clamp(18rem, 40vw, 36rem);
+  letter-spacing: -0.05em;
+  color: rgba(255,255,255,0.025);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.coaches-box .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Top badge row */
+.cb-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+/* ── Badge — generic reusable component ───────────────────────
+   Usage: <span class="badge badge--cobalt">Label</span>
+   Works on both light and dark backgrounds.
+   cb-badge is now an alias for badge (kept for backwards compat)
+   ─────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  /* default: cobalt */
+  background: var(--cobalt);
+  color: var(--chalk);
+}
+
+/* Color variants */
+.badge--pink    { background: var(--red);     color: var(--chalk); }
+.badge--cobalt  { background: var(--cobalt);  color: var(--chalk); }
+.badge--cobalt-dark  { background: var(--cobalt-dark);  color: var(--chalk); }
+.badge--green   { background: var(--green);   color: var(--chalk); }
+.badge--ink     { background: var(--ink);     color: var(--chalk); }
+.badge--chalk   { background: var(--chalk);   color: var(--ink);   }
+.badge--outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--text-primary);
+}
+
+/* cb-badge keeps its original cobalt color (backwards compat alias) */
+.cb-badge { background: var(--cobalt); color: var(--chalk); }
+
+
+.cb-badge-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* Layout */
+.cb-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.cb-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.5vw, 5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+  color: #fff;
+  margin-bottom: 1.75rem;
+}
+.cb-headline .accent { color: var(--red); }
+
+.cb-desc {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  max-width: 460px;
+}
+
+/* h3 subheadings inside dark CB section */
+.cb-subhead {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  /*text-transform: uppercase; */
+  /*letter-spacing: 0.08em;*/
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.cb-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+.cb-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.cb-feature-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
+  margin-top: 0.5rem;
+}
+.cb-feature p {
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Right panel: mockup card */
+.cb-card {
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.cb-card-header {
+  background: rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.cb-card-dots {
+  display: flex;
+  gap: 0.4rem;
+}
+.cb-card-dots span {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+}
+.cb-card-title {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.cb-card-body {
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Stat row */
+.cb-stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+.cb-stat {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 2px;
+  padding: 1rem;
+  text-align: center;
+}
+.cb-stat .stat-num {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--red);
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.cb-stat .stat-label {
+  /* extends .meta-label via shared pattern */
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Training block mockup */
+.cb-block-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cb-block-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 2px;
+}
+.cb-block-color {
+  width: 4px;
+  height: 28px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.cb-block-info { flex: 1; }
+.cb-block-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+.cb-block-meta {
+  font-family: var(--font-ui);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.cb-block-tag {
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1px;
+}
+
+/* ============================================================
+   SECTION: LOGBOOK
+   ============================================================ */
+.logbook {
+  padding: 6rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.logbook-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.logbook-visual {
+  position: relative;
+}
+
+/* Book mockup */
+.book-mockup {
+  width: 240px;
+  margin: 0 auto;
+  position: relative;
+}
+.book-cover {
+  background: var(--cobalt);
+  border-radius: 3px 8px 8px 3px;
+  padding: 2.5rem 2rem;
+  box-shadow: 6px 6px 0 var(--red), 12px 12px 0 rgba(20,20,40,0.2);
+  text-align: center;
+}
+.book-cover-label {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--chalk);
+  margin-bottom: 1.25rem;
+  display: block;
+}
+.book-cover-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.book-cover-sub {
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+}
+.book-cover-line {
+  width: 40px;
+  height: 1px;
+  background: var(--chalk);
+  opacity: 0.4;
+  margin: 1.25rem auto;
+}
+.book-cover-author {
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+
+/* Section headings reuse .section-heading utility */
+.logbook-content h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  letter-spacing: 0.03em;
+  line-height: 1;
+  margin-bottom: 1.25rem;
+}
+.logbook-content .logbook-desc {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+.logbook-specs {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.logbook-spec .spec-val {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--dark);
+  letter-spacing: 0.05em;
+  display: block;
+}
+.logbook-spec .spec-key {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ============================================================
+   SECTION: ABOUT
+   ============================================================ */
+.about {
+  padding: 7rem 0;
+  background: var(--off-white);
+  border-bottom: 1px solid var(--rule);
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;  /* text left, photo right */
+  gap: 5rem;
+  align-items: start;
+}
+
+.about-photo-wrap {
+  position: relative;
+}
+.about-photo-frame {
+  position: relative;
+  overflow: hidden;
+}
+.about-photo-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: sepia(10%) contrast(1.05);
+}
+.about-photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(0,0,0,0.08);
+  pointer-events: none;
+}
+.about-photo-caption {
+  margin-top: 1rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+
+.about-content h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 0.03em;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.about-content .about-role {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.1rem;
+  color: var(--text-accent);
+  margin-bottom: 2rem;
+}
+.about-content p {
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+}
+.about-content p:last-of-type { margin-bottom: 2.5rem; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.55);
+  padding: 4rem 0 2rem;
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.footer-brand .footer-wordmark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.footer-brand .footer-tagline {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.footer-nav-group h4 {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  color: var(--cobalt);
+  margin-bottom: 1rem;
+}
+.footer-nav-group ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.footer-nav-group a {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  transition: color 0.25s;
+}
+.footer-nav-group a:hover { color: var(--text-primary); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-copy {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+.footer-bottom-links {
+  display: flex;
+  gap: 1.5rem;
+}
+.footer-bottom-links a {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  transition: color 0.25s;
+}
+.footer-bottom-links a:hover { color: var(--cobalt); }
+
+/* ============================================================
+   WEATHER WIDGET
+   ============================================================ */
+.weather-widget {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(232, 23, 93, 0.08);
+  border: 1px solid rgba(232, 23, 93, 0.15);
+  border-radius: 8px;
+  font-family: var(--font-ui);
+}
+
+.weather-loading {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.weather-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.weather-emoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.weather-info {
+  flex: 1;
+}
+
+.weather-temp {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.weather-desc {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.weather-error {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ── Transition delays for staggered reveals ──────────────── */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-15 { transition-delay: 0.15s; }
+
+/* ── Button variants ──────────────────────────────────────── */
+.btn-outline-light {
+  color: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.btn-outline-light:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--chalk);
+}
+
+/* ── CB Block colors (mockup) ─────────────────────────────── */
+.cb-block-color-gold { background: #B8892A; }
+.cb-block-color-green { background: #5A8A6A; }
+.cb-block-color-blue { background: #4A6B9A; }
+.cb-block-color-purple { background: #8A5A8A; }
+
+.cb-block-tag-gold {
+  background: rgba(184,137,42,0.15);
+  color: #B8892A;
+}
+.cb-block-tag-green {
+  background: rgba(90,138,106,0.15);
+  color: #5A8A6A;
+}
+.cb-block-tag-blue {
+  background: rgba(74,107,154,0.15);
+  color: #8AABD4;
+}
+.cb-block-tag-purple {
+  background: rgba(138,90,138,0.15);
+  color: #C49AC4;
+}
